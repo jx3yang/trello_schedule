@@ -5,6 +5,6 @@ import datetime as dt
 class ClassWork:
     title: str
     start_date: dt.datetime
-    end_date: dt.datetime
+    due_date: dt.datetime
     percent_worth: float
     course_name: str

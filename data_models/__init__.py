@@ -1,3 +1,4 @@
+from .classwork import ClassWork
 from .assignment import Assignment
 from .exam import Exam
 from .quiz import Quiz
@@ -9,6 +10,6 @@ from .trello_list import TrelloList
 from .trello_board import TrelloBoard
 
 __all__ = [
-    'Assignment', 'Course', 'Exam', 'Quiz',
+    'ClassWork', 'Assignment', 'Course', 'Exam', 'Quiz',
     'TrelloCredentials', 'TrelloCard', 'TrelloList', 'TrelloBoard'
 ]

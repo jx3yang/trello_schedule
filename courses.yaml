@@ -1,24 +1,29 @@
 courses:
   cs350:
     quizzes:
-      all:
-        due: 2021,4,14
-        num: 9
-        worth: 25
+      idx: 1 # default is 1
+      data:
+        all:
+          due: 2021,4,14
+          num: 9
+          worth: 25
     assignments:
-      - due: 2021,1,22,23,30
-        worth: 2
-      - due: 2021,2,12,23,30
-        worth: 10
-      - due: 2021,3,12,23,30
-        worth: 15
-      - due: 2021,4,9,23,30
-        worth: 13
+      idx: 0
+      data:
+        - due: 2021,1,22,23,30
+          worth: 2
+        - due: 2021,2,12,23,30
+          worth: 10
+        - due: 2021,3,12,23,30
+          worth: 15
+        - due: 2021,4,9,23,30
+          worth: 13
     exams:
-      - name: Final Exam
-        start: 2021,4,17,12,00
-        due: 2021,4,23,23,59
-        worth: 35
+      data:
+        - name: Final Exam
+          start: 2021,4,17,12,00
+          due: 2021,4,23,23,59
+          worth: 35
 
   # cs348:
   #   quizzes:
