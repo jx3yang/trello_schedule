@@ -13,10 +13,11 @@ def parse_board_file(credentials: Credentials, file: str) -> Optional[Tuple[Trel
     board_info = load_board_info(file)
     board_name = board_info[BOARD]
     list_name = board_info[LIST]
+    start_date_field = board_info[START_DATE_FIELD]
     board_id = get_board_id(credentials, board_name)
     list_id = get_list_id(credentials, board_id, list_name)
 
-    trello_board = TrelloBoard(board_id=board_id, name=name)
+    trello_board = TrelloBoard(board_id=board_id, name=name, start_date_field=start_date_field)
     trello_list = TrelloList(list_id=list_id, name=list_name)
     return trello_board, trello_list
 

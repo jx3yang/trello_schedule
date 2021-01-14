@@ -20,3 +20,4 @@ FREQUENCY = 'frequency'
 # board fields
 BOARD = 'board'
 LIST = 'list'
+START_DATE_FIELD = 'start_date_field'

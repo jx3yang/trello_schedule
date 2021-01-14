@@ -4,3 +4,4 @@ from dataclasses import dataclass
 class TrelloBoard:
     board_id: str
     name: str
+    start_date_field: str

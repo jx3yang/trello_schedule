@@ -1,6 +1,6 @@
 from typing import List
 import yaml
-from .constants import BOARD, COURSES, LIST
+from .constants import BOARD, COURSES, LIST, START_DATE_FIELD
 
 def raise_fields_not_found(fields: List[str]):
     quotes = lambda x: f'"{x}"'
@@ -26,4 +26,4 @@ def load_courses_info(file: str):
     return load_from_file(file, [COURSES])
 
 def load_board_info(file: str):
-    return load_from_file(file, [BOARD, LIST])
+    return load_from_file(file, [BOARD, LIST, START_DATE_FIELD])
