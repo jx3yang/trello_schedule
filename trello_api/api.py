@@ -15,6 +15,20 @@ def get_boards(credentials: Credentials):
         params={ 'fields': 'name,url' }
     )
 
+def get_board_id(credentials: Credentials, board_name: str):
+    boards = json.loads(get_boards(credentials).text)
+    for board in boards:
+        if board['name'] == board_name:
+            return board['id']
+    return None
+
+def get_list_id(credentials: Credentials, board_id: str, list_name: str):
+    lists = json.loads(get_lists(credentials, board_id).text)
+    for lst in lists:
+        if lst['name'] == list_name:
+            return lst['id']
+    return None
+
 def get_custom_fields(credentials: Credentials, board_id: str):
     return __make_request(
         credentials=credentials,
