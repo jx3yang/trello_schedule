@@ -2,7 +2,7 @@ from .utils import load_board_info, load_courses_info, not_found_fields, verify_
 from .constants import *
 
 from data_models import *
-from trello_api import get_board_id, get_list_id
+from trello_api import get_board_id, get_list_id, get_custom_field_id
 from time_utils import get_date
 
 from typing import List, Optional, Tuple, Type
@@ -16,13 +16,14 @@ def parse_board_file(credentials: Credentials, file: str) -> Optional[Tuple[Trel
     start_date_field = board_info[START_DATE_FIELD]
     board_id = get_board_id(credentials, board_name)
     list_id = get_list_id(credentials, board_id, list_name)
+    start_date_id = get_custom_field_id(credentials, board_id, start_date_field)
 
-    trello_board = TrelloBoard(board_id=board_id, name=name, start_date_field=start_date_field)
+    trello_board = TrelloBoard(board_id=board_id, name=board_name, start_date_id=start_date_id)
     trello_list = TrelloList(list_id=list_id, name=list_name)
     return trello_board, trello_list
 
 
-def parse_class_work_group(data: dict, prefix: str, idx: int, course_name: str, WorkType: Type[ClassWork]) -> Optional[List[ClassWork]]:
+def parse_class_work_group(data: dict, prefix: str, idx: int, WorkType: Type[ClassWork]) -> Optional[List[ClassWork]]:
     verify_fields([ALL], data)
     data_all = data[ALL]
     verify_fields([NUM], data_all)
@@ -43,39 +44,37 @@ def parse_class_work_group(data: dict, prefix: str, idx: int, course_name: str, 
             title=f'{prefix} {i + idx}',
             start_date=get_start_date(i),
             due_date=get_due_date(i),
-            percent_worth=data_all.get(WORTH) / num,
-            course_name=course_name
+            percent_worth=data_all.get(WORTH) / num
         )
         for i in range(num)
     ]
 
-def parse_class_work_list(data: list, prefix: str, idx: int, course_name: str, WorkType: Type[ClassWork]) -> Optional[List[ClassWork]]:
+def parse_class_work_list(data: list, prefix: str, idx: int, WorkType: Type[ClassWork]) -> Optional[List[ClassWork]]:
     return [
         WorkType(
             title=entry.get(NAME, f'{prefix} {i + idx}'),
             start_date=get_date(entry.get(START)) if START in entry else None,
             due_date=get_date(entry.get(DUE)) if DUE in entry else None,
-            percent_worth=entry.get(WORTH),
-            course_name=course_name
+            percent_worth=entry.get(WORTH)
         )
         for i, entry in enumerate(data)
     ]
 
-def parse_class_work(info: dict, prefix: str, course_name: str, WorkType: Type[ClassWork]) -> Optional[List[ClassWork]]:
+def parse_class_work(info: dict, prefix: str, WorkType: Type[ClassWork]) -> Optional[List[ClassWork]]:
     verify_fields([DATA], info)
     idx = info[IDX] if IDX in info else 1
     data = info[DATA]
     if isinstance(data, list):
-        return parse_class_work_list(data, prefix, idx, course_name, WorkType)
+        return parse_class_work_list(data, prefix, idx, WorkType)
     else:
-        return parse_class_work_group(data, prefix, idx, course_name, WorkType)
+        return parse_class_work_group(data, prefix, idx, WorkType)
 
 def parse_course(course: dict, course_name: str) -> Optional[Course]:
     return Course(
         name=course_name,
-        assignments=parse_class_work(course[ASSIGNMENTS], 'Assignment', course_name, Assignment) if ASSIGNMENTS in course else [],
-        quizzes=parse_class_work(course[QUIZZES], 'Quiz', course_name, Quiz) if QUIZZES in course else [],
-        exams=parse_class_work(course[EXAMS], 'Exam', course_name, Exam) if EXAMS in course else []
+        assignments=parse_class_work(course[ASSIGNMENTS], 'Assignment', Assignment) if ASSIGNMENTS in course else [],
+        quizzes=parse_class_work(course[QUIZZES], 'Quiz', Quiz) if QUIZZES in course else [],
+        exams=parse_class_work(course[EXAMS], 'Exam', Exam) if EXAMS in course else []
     )
 
 def parse_courses_file(file: str) -> Optional[List[Course]]:

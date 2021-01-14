@@ -1,10 +1,8 @@
 from dataclasses import dataclass
-import datetime as dt
 
 @dataclass
 class ClassWork:
     title: str
-    start_date: dt.datetime
-    due_date: dt.datetime
+    start_date: str
+    due_date: str
     percent_worth: float
-    course_name: str

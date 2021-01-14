@@ -15,20 +15,6 @@ def get_boards(credentials: Credentials):
         params={ 'fields': 'name,url' }
     )
 
-def get_board_id(credentials: Credentials, board_name: str):
-    boards = json.loads(get_boards(credentials).text)
-    for board in boards:
-        if board['name'] == board_name:
-            return board['id']
-    return None
-
-def get_list_id(credentials: Credentials, board_id: str, list_name: str):
-    lists = json.loads(get_lists(credentials, board_id).text)
-    for lst in lists:
-        if lst['name'] == list_name:
-            return lst['id']
-    return None
-
 def get_custom_fields(credentials: Credentials, board_id: str):
     return __make_request(
         credentials=credentials,
@@ -41,6 +27,28 @@ def get_lists(credentials: Credentials, board_id: str):
         path=f'/boards/{board_id}/lists'
     )
 
+def _get_id_from_list(credentials: Credentials, request: callable, target: str):
+    lst = json.loads(request(credentials).text)
+    for item in lst:
+        if item['name'] == target:
+            return item['id']
+    return None
+
+def get_board_id(credentials: Credentials, board_name: str):
+    return _get_id_from_list(
+        credentials, lambda credentials: get_boards(credentials), board_name
+    )
+
+def get_list_id(credentials: Credentials, board_id: str, list_name: str):
+    return _get_id_from_list(
+        credentials, lambda credentials: get_lists(credentials, board_id), list_name
+    )
+
+def get_custom_field_id(credentials: Credentials, board_id, field_name: str):
+    return _get_id_from_list(
+        credentials, lambda credentials: get_custom_fields(credentials, board_id), field_name
+    )
+
 def get_cards(credentials: Credentials, list_id: str):
     return __make_request(
         credentials=credentials,
@@ -51,6 +59,7 @@ def create_card(credentials: Credentials, list_id: str, params={}):
     return __make_request(
         credentials=credentials,
         path='/cards',
+        method='POST',
         params={ **params, 'idList': list_id }
     )
 
