@@ -1,12 +1,13 @@
-from .utils import load_board_info, load_courses_info, not_found_fields, verify_fields
-from .constants import *
-
-from data_models import *
-from trello_api import get_board_id, get_list_id, get_custom_field_id
-from time_utils import *
-
 import datetime as dt
 from typing import List, Optional, Tuple, Type
+
+from data_models import *
+from time_utils import *
+from trello_api import get_board_id, get_custom_field_id, get_list_id
+
+from .constants import *
+from .utils import (load_board_info, load_courses_info, not_found_fields,
+                    verify_fields)
 
 Credentials = TrelloCredentials
 
@@ -87,12 +88,6 @@ def parse_class_work_group(data: dict, prefix: str, idx: int, WorkType: Type[Cla
 
 def parse_class_work_list(data: list, prefix: str, idx: int, WorkType: Type[ClassWork]) -> Optional[List[ClassWork]]:
     return [_parse_entry(entry, prefix, i + idx, WorkType) for i, entry in enumerate(data)]
-            # WorkType(
-        #     title=entry.get(NAME, f'{prefix} {i + idx}'),
-        #     start_date=get_date(entry.get(START)) if START in entry else None,
-        #     due_date=get_date(entry.get(DUE)) if DUE in entry else None,
-        #     percent_worth=entry.get(WORTH)
-        # )
 
 def parse_class_work(info: dict, prefix: str, WorkType: Type[ClassWork]) -> Optional[List[ClassWork]]:
     verify_fields([DATA], info)

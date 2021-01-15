@@ -1,9 +1,9 @@
-from trello_api import *
+import time
+from typing import List
+
 from data_models import *
 from parsing import *
-import time
-
-from typing import List
+from trello_api import *
 
 Credentials = TrelloCredentials
 

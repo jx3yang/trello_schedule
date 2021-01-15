@@ -1,9 +1,10 @@
 import json
+
 import requests
+from data_models import TrelloCredentials as Credentials
 
 from .constants import *
 
-from data_models import TrelloCredentials as Credentials
 
 def get_credentials(file=CRED_FILE):
     return Credentials(json.load(open(file)))

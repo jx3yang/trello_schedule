@@ -1,10 +1,11 @@
 from dataclasses import dataclass
-from typing import List
 from textwrap import indent
+from typing import List
 
 from .assignment import Assignment
-from .quiz import Quiz
 from .exam import Exam
+from .quiz import Quiz
+
 
 @dataclass
 class Course:

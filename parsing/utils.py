@@ -1,6 +1,9 @@
 from typing import List
+
 import yaml
+
 from .constants import BOARD, COURSES, LIST, START_DATE_FIELD
+
 
 def raise_fields_not_found(fields: List[str]):
     quotes = lambda x: f'"{x}"'
