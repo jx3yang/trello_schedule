@@ -7,7 +7,8 @@ EXAMS = 'exams'
 IDX = 'idx'
 DATA = 'data'
 
-ALL = 'all'
+GROUP = 'group'
+AGG = 'agg'
 NUM = 'num'
 
 NAME = 'name'
@@ -15,6 +16,7 @@ START = 'start'
 DUE = 'due'
 WORTH = 'worth'
 FREQUENCY = 'frequency'
+EXCEPT = 'except'
 
 
 # board fields

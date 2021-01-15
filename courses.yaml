@@ -1,9 +1,8 @@
 courses:
   cs350:
     quizzes:
-      idx: 1 # default is 1
       data:
-        all:
+        agg:
           due: 2021,4,14
           num: 9
           worth: 25
@@ -25,22 +24,149 @@ courses:
           due: 2021,4,23,23,59
           worth: 35
 
-  # cs348:
-  #   quizzes:
-  #   assignments:
-  #   exams:
+  cs348:
+    assignments:
+      data:
+        - start: 2021,1,20
+          due: 2021,1,29,17
+          worth: 11
+        - start: 2021,1,29
+          due: 2021,2,12,17
+          worth: 11
+        - start: 2021,2,12
+          due: 2021,3,5,17
+          worth: 11
+        - start: 2021,3,5
+          due: 2021,3,19,17
+          worth: 11
+        - start: 2021,3,19
+          due: 2021,4,2,17
+          worth: 11
+        - start: 2021,4,2
+          due: 2021,4,14,17
+          worth: 11
+    exams:
+      data:
+        - name: Final Exam
+          due: 2021,4,14
+          worth: 34
 
-  # cs341:
-  #   quizzes:
-  #   assignments:
-  #   exams:
+  cs341:
+    quizzes:
+      data:
+        group:
+          - agg:
+              due: 2021,2,28,23,59
+              worth: 3
+              num: 6
+          - agg:
+              idx: 7
+              due: 2021,4,14,23,59
+              worth: 3
+              num: 6
+    assignments:
+      data:
+        group:
+          - agg:
+              start: 2021,1,20
+              due: 2021,1,27,23,59
+              worth: 60
+              frequency: 7
+              num: 10
+              except: # no assignments should be due or should start during this period
+              - start: 2021,2,15
+                due: 2021,2,19
+          - name: Programming 1
+            start: 2021,2,10
+            due: 2021,3,3,23,59
+            worth: 6
+          - name: Programming 2
+            start: 2021,3,10
+            due: 2021,3,24,23,59
+            worth: 6
+    exams:
+      data:
+        - name: Final Exam
+          start: 2021,4,19,23,59
+          due: 2021,4,21,23,59
+          worth: 22
 
-  # stat341:
-  #   quizzes:
-  #   assignments:
-  #   exams:
+  stat341:
+    quizzes:
+      data:
+        group:
+          - agg:
+              idx: 1
+              start: 2021,1,18,12
+              due: 2021,1,20,23,59
+              frequency: 7
+              num: 7
+              except: # no assignments should be due or should start during this period
+                - start: 2021,2,15
+                  due: 2021,2,19
+              worth: 7
+          - start: 2021,3,17,12
+            due: 2021,3,19,23,59
+            name: Quiz 8
+            worth: 1
+          - agg:
+              idx: 9
+              start: 2021,3,22,12
+              due: 2021,3,24,23,59
+              frequency: 7
+              num: 4
+              worth: 4
+    assignments:
+      data:
+        group:
+          - agg:
+              start: 2021,1,13
+              due: 2021,1,27,23,59
+              frequency: 14
+              num: 2
+              worth: 30
+          - start: 2021,2,10
+            due: 2021,3,3,23,59
+            worth: 15
+          - agg:
+              idx: 4
+              frequency: 14
+              num: 3
+              worth: 45
+              start: 2021,3,3
+              due: 2021,3,17,23,59
 
-  # japan102r:
-  #   quizzes:
-  #   assignments:
-  #   exams:
+  japan102r:
+    assignments:
+      data:
+        agg:
+          start: 2021,1,12
+          due: 2021,1,19,23,59
+          frequency: 7
+          except: # no assignments should be due or should start during this period
+            - start: 2021,2,15
+              due: 2021,2,19
+          num: 6
+          worth: 30
+    exams:
+      data:
+        - name: Reading test
+          start: 2021,3,2
+          due: 2021,3,9
+          worth: 5
+        - name: Oral test
+          start: 2021,3,9
+          due: 2021,3,17
+          worth: 15
+        - name: Writing test 1
+          start: 2021,3,22,19
+          due: 2021,3,22,22
+          worth: 15
+        - name: Listening test 1
+          start: 2021,3,23
+          due: 2021,3,30
+          worth: 15
+        - name: Writing test 2
+          start: 2021,4,12,19
+          due: 2021,4,12,23,59
+          worth: 20
